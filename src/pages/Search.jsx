@@ -12,7 +12,7 @@ const Search = () => {
   const [range, setRange] = useState(1);  //検索範囲
   const [people, setPeople] = useState(""); //人数
   const [keyword, setKeyword] = useState(""); //検索キーワード
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     //console.log(range);
