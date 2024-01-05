@@ -5,6 +5,7 @@
 */
 
 import { useState } from "react"
+import { useRouter } from "next/router";
 
 
 const Search = () => {
@@ -12,6 +13,8 @@ const Search = () => {
   const [range, setRange] = useState(1);  //検索範囲
   const [people, setPeople] = useState(""); //人数
   const [keyword, setKeyword] = useState(""); //検索キーワード
+
+  const router = useRouter();
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,8 +31,17 @@ const Search = () => {
   };
 
   const success = (position) => {
-    console.log(position.coords.latitude);
-    console.log(position.coords.longitude);
+    //console.log(position.coords.latitude);
+    //console.log(position.coords.longitude);
+
+    router.push({
+      pathname:"/locations",   //URL
+      query: {
+        latitude :position.coords.latitude,
+        longitude :position.coords.longitude,
+      } //検索クエリ
+    });
+
   }
 
   const error = () => {
