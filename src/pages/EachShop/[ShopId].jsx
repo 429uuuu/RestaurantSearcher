@@ -1,8 +1,25 @@
 const shop = (shopDetails) => {
 
-  console.log(shopDetails.results.shop);
+  //shopリンク
+  const shopLink = shopDetails.results.shop[0].urls.pc;
+  //map情報
+  const latitude = shopDetails.results.shop[0].lat;
+  const longitude = shopDetails.results.shop[0].lng;
+  const googleMapLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+
+
   return (
     <>
+      <p>{shopDetails.results.shop[0].name}</p> 
+      <p>{shopDetails.results.shop[0].name_kana}</p>
+      <p>{shopDetails.results.shop[0].address}</p>
+      <p>{shopDetails.results.shop[0].open}</p> 
+      <a href={shopLink} target="_blank" rel="noopener noreferrer">
+        店舗ページ
+      </a>
+      <a href={googleMapLink} target="_blank" rel="noopener noreferrer">
+        Maps
+      </a>
     </>
   );
 }
