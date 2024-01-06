@@ -1,28 +1,32 @@
 import Image from "next/image"
+import Link from 'next/link'
 
 const Locations = ({ results }) => {
   console.log(results.results_returned);
-  console.log(results.shop[0].photo);
+  // console.log(results.shop[1].id);
 
 
   return(
     <>
       <ul className="card">
-        <div className="flex">
+        <div className="flex"> 
           {results.shop.map(shop => (
-            <li key={shop.id}>
-              <p className="shop">{shop.name}</p>
-              <p className="access">{shop.access}</p>  
-              <p className="open">{shop.open}</p>
-              {/* <Image 
-                className="photo" 
-                src={shop.photo.pc.m} 
-                alt={"image"} 
-                layout={"fill"}
-                objectFit={"cover"}
-              /> */}
-            </li>))}
-        </div>
+              <li key={shop.id}>
+                <Link href={`./EachShop/${shop.id}`}>
+                  <p className="shop">{shop.name}</p>
+                  <p className="access">{shop.access}</p>  
+                  <p className="open">{shop.open}</p>
+                  {/* <Image 
+                    className="photo" 
+                    src={shop.photo.pc.m} 
+                    alt={"image"} 
+                    layout={"fill"}
+                    objectFit={"cover"}
+                  /> */}
+                </Link>
+              </li>
+            ))}
+        </div> 
       </ul>
       
     
