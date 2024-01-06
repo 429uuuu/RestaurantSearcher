@@ -1,6 +1,34 @@
-const Locations = ({ results }) => {
+import Image from "next/image"
 
-  console.log(results);
+const Locations = ({ results }) => {
+  console.log(results.results_returned);
+  console.log(results.shop[0].photo);
+
+
+  return(
+    <>
+      <ul className="card">
+        <div className="flex">
+          {results.shop.map(shop => (
+            <li key={shop.id}>
+              <p className="shop">{shop.name}</p>
+              <p className="access">{shop.access}</p>  
+              <p className="open">{shop.open}</p>
+              {/* <Image 
+                className="photo" 
+                src={shop.photo.pc.m} 
+                alt={"image"} 
+                layout={"fill"}
+                objectFit={"cover"}
+              /> */}
+            </li>))}
+        </div>
+      </ul>
+      
+    
+    </>
+  );
+
 };
 
 export default Locations;
