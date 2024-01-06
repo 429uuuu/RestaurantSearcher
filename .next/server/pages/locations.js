@@ -29,7 +29,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/router */ \"./node_modules/next/router.js\");\n/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_1__);\n\n\nconst Locations = ()=>{};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Locations);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvcGFnZXMvbG9jYXRpb25zLmpzeCIsIm1hcHBpbmdzIjoiOzs7Ozs7OztBQUFnQztBQUNRO0FBRXhDLE1BQU1FLFlBQVksS0FFbEI7QUFFQSxpRUFBZUEsU0FBU0EsRUFBQyIsInNvdXJjZXMiOlsid2VicGFjazovL3Jlc3RhdXJhbnQtc2VhcmNoZXItYXBwLy4vc3JjL3BhZ2VzL2xvY2F0aW9ucy5qc3g/ODliNSJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyB1c2VTdGF0ZSB9IGZyb20gXCJyZWFjdFwiXG5pbXBvcnQgeyB1c2VSb3V0ZXIgfSBmcm9tIFwibmV4dC9yb3V0ZXJcIjtcblxuY29uc3QgTG9jYXRpb25zID0gKCkgPT4ge1xuXG59O1xuXG5leHBvcnQgZGVmYXVsdCBMb2NhdGlvbnM7Il0sIm5hbWVzIjpbInVzZVN0YXRlIiwidXNlUm91dGVyIiwiTG9jYXRpb25zIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/pages/locations.jsx\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__),\n/* harmony export */   getServerSideProps: () => (/* binding */ getServerSideProps)\n/* harmony export */ });\nconst Locations = ({ results })=>{\n    console.log(results);\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Locations);\n//グルメサーチapiからデータの取得\nconst getServerSideProps = async (context)=>{\n    const apiKey = \"fceb6af4b6a51613\";\n    const baseUrl = \"https://webservice.recruit.co.jp/hotpepper/gourmet/v1/\";\n    const latitude = context.query.latitude;\n    const longitude = context.query.longitude;\n    const range = context.query.range;\n    const format = \"json\"; // フォーマットJSONを指定\n    // 外部APIからデータをFetch\n    try {\n        const res = await fetch(`${baseUrl}?key=${apiKey}&lat=${latitude}&lng=${longitude}&range=${range}&format=${format}`);\n        const json = await res.json();\n        const { results } = json;\n        return {\n            props: {\n                results\n            }\n        };\n    } catch (e) {\n        console.error(e);\n    }\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvcGFnZXMvbG9jYXRpb25zLmpzeCIsIm1hcHBpbmdzIjoiOzs7OztBQUFBLE1BQU1BLFlBQVksQ0FBQyxFQUFFQyxPQUFPLEVBQUU7SUFFNUJDLFFBQVFDLEdBQUcsQ0FBQ0Y7QUFDZDtBQUVBLGlFQUFlRCxTQUFTQSxFQUFDO0FBRXpCLG1CQUFtQjtBQUNaLE1BQU1JLHFCQUFxQixPQUFNQztJQUV0QyxNQUFNQyxTQUFTQyxrQkFBNEM7SUFDM0QsTUFBTUcsVUFBVTtJQUNoQixNQUFNQyxXQUFXTixRQUFRTyxLQUFLLENBQUNELFFBQVE7SUFDdkMsTUFBTUUsWUFBWVIsUUFBUU8sS0FBSyxDQUFDQyxTQUFTO0lBQ3pDLE1BQU1DLFFBQVFULFFBQVFPLEtBQUssQ0FBQ0UsS0FBSztJQUNqQyxNQUFNQyxTQUFTLFFBQVEsZ0JBQWdCO0lBRXZDLG1CQUFtQjtJQUNuQixJQUFHO1FBQ0QsTUFBTUMsTUFBTSxNQUFNQyxNQUNoQixDQUFDLEVBQUVQLFFBQVEsS0FBSyxFQUFFSixPQUFPLEtBQUssRUFBRUssU0FBUyxLQUFLLEVBQUVFLFVBQVUsT0FBTyxFQUFFQyxNQUFNLFFBQVEsRUFBRUMsT0FBTyxDQUFDO1FBRTdGLE1BQU1HLE9BQU8sTUFBTUYsSUFBSUUsSUFBSTtRQUMzQixNQUFNLEVBQUVqQixPQUFPLEVBQUUsR0FBR2lCO1FBRXBCLE9BQU87WUFBRUMsT0FBTztnQkFBRWxCO1lBQVE7UUFBRTtJQUM5QixFQUFDLE9BQU1tQixHQUFFO1FBQ1BsQixRQUFRbUIsS0FBSyxDQUFDRDtJQUNoQjtBQUNGLEVBQUMiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9yZXN0YXVyYW50LXNlYXJjaGVyLWFwcC8uL3NyYy9wYWdlcy9sb2NhdGlvbnMuanN4Pzg5YjUiXSwic291cmNlc0NvbnRlbnQiOlsiY29uc3QgTG9jYXRpb25zID0gKHsgcmVzdWx0cyB9KSA9PiB7XG5cbiAgY29uc29sZS5sb2cocmVzdWx0cyk7XG59O1xuXG5leHBvcnQgZGVmYXVsdCBMb2NhdGlvbnM7XG5cbi8v44Kw44Or44Oh44K144O844OBYXBp44GL44KJ44OH44O844K/44Gu5Y+W5b6XXG5leHBvcnQgY29uc3QgZ2V0U2VydmVyU2lkZVByb3BzID0gYXN5bmMoY29udGV4dCkgPT57XG5cbiAgY29uc3QgYXBpS2V5ID0gcHJvY2Vzcy5lbnYuTkVYVF9QVUJMSUNfR1VSVU1FU0VBUkNIX0FQSV9LRVk7XG4gIGNvbnN0IGJhc2VVcmwgPSBcImh0dHBzOi8vd2Vic2VydmljZS5yZWNydWl0LmNvLmpwL2hvdHBlcHBlci9nb3VybWV0L3YxL1wiO1xuICBjb25zdCBsYXRpdHVkZSA9IGNvbnRleHQucXVlcnkubGF0aXR1ZGU7XG4gIGNvbnN0IGxvbmdpdHVkZSA9IGNvbnRleHQucXVlcnkubG9uZ2l0dWRlO1xuICBjb25zdCByYW5nZSA9IGNvbnRleHQucXVlcnkucmFuZ2U7XG4gIGNvbnN0IGZvcm1hdCA9IFwianNvblwiOyAvLyDjg5Xjgqnjg7zjg57jg4Pjg4hKU09O44KS5oyH5a6aXG5cbiAgLy8g5aSW6YOoQVBJ44GL44KJ44OH44O844K/44KSRmV0Y2hcbiAgdHJ5e1xuICAgIGNvbnN0IHJlcyA9IGF3YWl0IGZldGNoKFxuICAgICAgYCR7YmFzZVVybH0/a2V5PSR7YXBpS2V5fSZsYXQ9JHtsYXRpdHVkZX0mbG5nPSR7bG9uZ2l0dWRlfSZyYW5nZT0ke3JhbmdlfSZmb3JtYXQ9JHtmb3JtYXR9YFxuICAgICk7XG4gICAgY29uc3QganNvbiA9IGF3YWl0IHJlcy5qc29uKCk7XG4gICAgY29uc3QgeyByZXN1bHRzIH0gPSBqc29uO1xuXG4gICAgcmV0dXJuIHsgcHJvcHM6IHsgcmVzdWx0cyB9IH07XG4gIH1jYXRjaChlKXtcbiAgICBjb25zb2xlLmVycm9yKGUpO1xuICB9XG59XG4iXSwibmFtZXMiOlsiTG9jYXRpb25zIiwicmVzdWx0cyIsImNvbnNvbGUiLCJsb2ciLCJnZXRTZXJ2ZXJTaWRlUHJvcHMiLCJjb250ZXh0IiwiYXBpS2V5IiwicHJvY2VzcyIsImVudiIsIk5FWFRfUFVCTElDX0dVUlVNRVNFQVJDSF9BUElfS0VZIiwiYmFzZVVybCIsImxhdGl0dWRlIiwicXVlcnkiLCJsb25naXR1ZGUiLCJyYW5nZSIsImZvcm1hdCIsInJlcyIsImZldGNoIiwianNvbiIsInByb3BzIiwiZSIsImVycm9yIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/pages/locations.jsx\n");
 
 /***/ }),
 
@@ -53,26 +53,6 @@ module.exports = require("react");
 
 /***/ }),
 
-/***/ "react-dom":
-/*!****************************!*\
-  !*** external "react-dom" ***!
-  \****************************/
-/***/ ((module) => {
-
-module.exports = require("react-dom");
-
-/***/ }),
-
-/***/ "fs":
-/*!*********************!*\
-  !*** external "fs" ***!
-  \*********************/
-/***/ ((module) => {
-
-module.exports = require("fs");
-
-/***/ }),
-
 /***/ "path":
 /*!***********************!*\
   !*** external "path" ***!
@@ -80,26 +60,6 @@ module.exports = require("fs");
 /***/ ((module) => {
 
 module.exports = require("path");
-
-/***/ }),
-
-/***/ "stream":
-/*!*************************!*\
-  !*** external "stream" ***!
-  \*************************/
-/***/ ((module) => {
-
-module.exports = require("stream");
-
-/***/ }),
-
-/***/ "zlib":
-/*!***********************!*\
-  !*** external "zlib" ***!
-  \***********************/
-/***/ ((module) => {
-
-module.exports = require("zlib");
 
 /***/ })
 

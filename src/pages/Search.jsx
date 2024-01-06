@@ -37,8 +37,9 @@ const Search = () => {
     router.push({
       pathname:"/locations",   //URL
       query: {
-        latitude :position.coords.latitude,
-        longitude :position.coords.longitude,
+        latitude : position.coords.latitude,
+        longitude : position.coords.longitude,
+        range : range,
       } //検索クエリ
     });
 
@@ -57,13 +58,11 @@ const Search = () => {
 
         <select value={range} onChange={(e) => setRange(e.target.value)} type="int" name="range" placeholder="範囲" >
 
-          <option value="1">1km</option>
-          <option value="2">2km</option>
-          <option value="3">3km</option>
-          <option value="4">4km</option>
-          <option value="5">5km</option>
-          <option value="6">6km</option>
-          <option value="7">7km</option>
+          <option value="1">300m</option>
+          <option value="2">500m</option>
+          <option value="3">1km</option>
+          <option value="4">2km</option>
+          <option value="5">3km</option>
         </select>
         <br />
         <select value={people} onChange={(e) => setPeople(e.target.value)} type="int" name="people">
