@@ -1,16 +1,27 @@
+import { useState } from "react";
 import Image from "next/image"
 import Link from 'next/link'
+import ReactPaginate from 'react-paginate';
 
 const Locations = ({ results }) => {
   console.log(results.results_returned);
   // console.log(results.shop[1].id);
+
+  /* ページング用 */
+  const [itemStart, setItemStart] = useState(0);  //アイテムの表示開始位置
+  const [perPage, setPerPage] = useState(10); //1ページあたりの表示件数
+  const handlePageClick = (data) => { //ページ選択時の動作
+    let pageNumber = data['selected']; 
+    setItemStart(pageNumber * perPage)
+  }
+
 
 
   return(
     <>
       <ul className="card">
         <div className="flex"> 
-          {results.shop.map(shop => (
+          {results.shop.slice(itemStart, itemStart+perPage).map(shop => (
               <li key={shop.id}>
                 <Link href={`./EachShop/${shop.id}`}>
                   <p className="shop">{shop.name}</p>
@@ -28,6 +39,16 @@ const Locations = ({ results }) => {
             ))}
         </div> 
       </ul>
+
+      <ReactPaginate
+        pageCount={results.results_returned/perPage} // 全体のページ数
+        pageRangeDisplayed={3} // 表示するページ番号の範囲
+        marginPagesDisplayed={1} // 左右の余白に表示するページ番号の数
+        onPageChange={handlePageClick}
+        previousLabel='<' 
+        nextLabel='>' 
+        breakLabel='...' 
+      />
       
     
     </>
