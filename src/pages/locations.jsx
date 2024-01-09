@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image"
 import Link from 'next/link'
 import ReactPaginate from 'react-paginate';
+import {Container, Row, Col } from 'react-bootstrap';
 
-const Locations = ({ results }) => {
-  console.log(results.results_returned);
+
+const Locations = ({ results, latitude, longitude  }) => {
+
+  console.log(latitude);
   // console.log(results.shop[1].id);
 
   /* ページング用 */
@@ -15,42 +18,79 @@ const Locations = ({ results }) => {
     setItemStart(pageNumber * perPage)
   }
 
+  const R = Math.PI / 180;
+
+ 
+  
 
 
   return(
     <>
-      <ul className="card">
-        <div className="flex"> 
-          {results.shop.slice(itemStart, itemStart+perPage).map(shop => (
-              <li key={shop.id}>
-                <Link href={`./EachShop/${shop.id}`}>
-                  <p className="shop">{shop.name}</p>
-                  <p className="access">{shop.access}</p>  
-                  <p className="open">{shop.open}</p>
-                  {/* <Image 
-                    className="photo" 
-                    src={shop.photo.pc.m} 
-                    alt={"image"} 
-                    layout={"fill"}
-                    objectFit={"cover"}
-                  /> */}
-                </Link>
-              </li>
-            ))}
-        </div> 
-      </ul>
+      <Container>
+        <div className="card my-3" >
 
-      <ReactPaginate
-        pageCount={results.results_returned/perPage} // 全体のページ数
-        pageRangeDisplayed={3} // 表示するページ番号の範囲
-        marginPagesDisplayed={1} // 左右の余白に表示するページ番号の数
-        onPageChange={handlePageClick}
-        previousLabel='<' 
-        nextLabel='>' 
-        breakLabel='...' 
-      />
-      
-    
+          <div className="card-header">
+            <p className="mb-0">検索結果：{results.results_returned}件</p>
+          </div>
+
+          <ul className="list-group list-group-flush">  
+              {results.shop.slice(itemStart, itemStart+perPage).map(shop => (
+                  <li key={shop.id} className="list-group-item">
+                    
+                    <Link href={`./EachShop/${shop.id}`} className="link-dark link-underline link-underline-opacity-0">
+                    <Row>
+                    {/* <Col md={3} className="position-relative"> */}
+                    <Col md={3} className="display-block" style={{ display:"flex", alignItems: "center"}}>
+                      <Image 
+                        className="photo" 
+                        src={shop.photo.pc.l} 
+                        alt={"image"} 
+                        layout={"responsive"}
+                        // objectFit={"cover"}
+                        // sizes="(max-width: 768px) 50vw"
+                        width={100}
+                        height={100}
+
+                      />  
+                      </Col>
+                      <Col>
+                        <h3 className="shop my-3">{shop.name}</h3>
+                        <p className="access">{shop.access}</p>  
+                        <p className="open">{shop.open}</p>
+                        {/* 直線距離 */}
+                        <p>直線距離：{Math.round(10 * (6371 * Math.acos(Math.cos(latitude*R) * Math.cos(shop.lat*R) * Math.cos(shop.lng*R - longitude*R) + Math.sin(latitude*R) * Math.sin(shop.lat*R))))/10}km</p>
+                      </Col>
+                    </Row>
+                    </Link>
+                    
+                  </li>
+              
+              ))}
+          </ul>
+        </div>
+
+        {/* ページネーション */}
+        <ReactPaginate
+          pageCount={results.results_returned/perPage} // 全体のページ数
+          pageRangeDisplayed={3} // 表示するページ番号の範囲
+          marginPagesDisplayed={1} // 左右の余白に表示するページ番号の数
+          onPageChange={handlePageClick}
+          previousLabel='<' 
+          nextLabel='>' 
+          breakLabel='...' 
+          containerClassName='pagination justify-content-center'
+          pageClassName='page-item page-item-color'
+          pageLinkClassName='page-link page-item-color'
+          activeClassName='active'
+          previousClassName='page-item'
+          nextClassName='page-item page-item-color'
+          previousLinkClassName='page-link page-item-color'  
+          nextLinkClassName='page-link page-item-color'
+          breakClassName='page-item page-item-color' 
+          breakLinkClassName='page-link page-item-color' 
+        />
+        
+      </Container>  
     </>
   );
 
@@ -66,17 +106,24 @@ export const getServerSideProps = async(context) =>{
   const latitude = context.query.latitude;
   const longitude = context.query.longitude;
   const range = context.query.range;
-  const format = "json"; // フォーマットJSONを指定
+  const count = 100;  //最大出力データ数
+  const format = "json"; // フォーマットJSON
 
   // 外部APIからデータをFetch
   try{
     const res = await fetch(
-      `${baseUrl}?key=${apiKey}&lat=${latitude}&lng=${longitude}&range=${range}&format=${format}`
+      `${baseUrl}?key=${apiKey}&lat=${latitude}&lng=${longitude}&range=${range}&format=${format}` //緯度・軽度・範囲から検索
+      // `${baseUrl}?key=${apiKey}&lat=34.67&lng=135.52&range=5&order=4&format=${format}&count=${count}`
     );
     const json = await res.json();
     const { results } = json;
 
-    return { props: { results } };
+    //直線距離の算出
+
+    return { props: { 
+      results,
+      latitude,
+      longitude } };
   }catch(e){
     console.error(e);
   }

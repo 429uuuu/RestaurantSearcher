@@ -1,5 +1,8 @@
 //pages/components/header
 
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+
 /* ヘッダー */
 
 import Link from "next/link"
@@ -9,9 +12,13 @@ const Header = () => {
 
     
     return (
-        <header>
-          <Link href="/">Restaurant Searcher</Link>
-        </header>
+      <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+        <Navbar.Brand href="/">
+          Restaurant Searcher
+        </Navbar.Brand>
+      </Navbar>
+
+      
     )
 }
 
