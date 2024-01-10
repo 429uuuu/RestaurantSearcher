@@ -60,7 +60,7 @@ JavaScript ( React:18.2.0 )
   - 飲食店の位置情報をgooglemap上に提供
 
 ### 設計ドキュメント
-
+<img width="1082" alt="スクリーンショット 2024-01-10 9 34 44" src="https://github.com/429uuuu/RestaurantSearcher/assets/142235241/6d46aed7-13dc-4e9e-b312-fa0bb5acce9d">
 
 
 ### 申し送り
