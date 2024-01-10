@@ -1,70 +1,82 @@
-# Getting Started with Create React App
+# 簡易仕様書
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 作者
+野尻澪
+### アプリ名
+Restaurant Searcher
 
-## Available Scripts
+### 該当プロジェクトのリポジトリ
+https://github.com/429uuuu/RestaurantSearcher.git
 
-In the project directory, you can run:
+### セットアップ
+`.env.local`ファイルを作成し、そこに環境変数としてaipキーを定義してください。
+```
+NEXT_PUBLIC_GURUMESEARCH_API_KEY = "apiKey";
+```
 
-### `npm start`
+Run コマンド
+```
+$ npm start
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### コンセプト
+近くの店が簡単に比較できる
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### こだわったポイント
+レスポンシブ対応するようになるべく調整した。
 
-### `npm test`
+### デザイン面でこだわったポイント
+「現在地周辺のレストラン」を検索するもので合ったため、現在地からの距離を一覧で比較できるようにした。
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 対象OSおよびブラウザ　(確認済み)
+- OS : macOS ventura 13.5.1
+- ブラウザ : 
+  - Google Chrome　バージョン: 120.0.6099.199（Official Build） （arm64）
+  - Safari バージョン16.6 (18615.3.12.11.2)
 
-### `npm run build`
+### 開発環境
+Visual Stadio Code バージョン: 1.81.1 (Universal)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 言語
+JavaScript ( React:18.2.0 )
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### フレームワーク(ver.含む)
+- next.js : 14.0.4
+- bootstrap : 5.3.2
+- react-bootstrap : 2.9.2
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 開発期間
+- 7日間
 
-### `npm run eject`
+## アプリケーション機能
+### 機能概要(機能一覧)
+- 飲食店検索機能：ホットペッパーグルメサーチAPIを使用し、現在地周辺の飲食店を検索
+  - 周辺距離を5段階で変更可能
+  - 店名/アクセス/営業時間の一覧表示
+  - 現在地からの直線距離の算出
+- 飲食店情報取得：ホットペッパーグルメサーチAPIを使用し、飲食店の詳細情報を取得
+  - 店名/住所/営業時間の表示
+  - 店舗ページへのリンク
+  - 飲食店の位置情報をgooglemap上に提供
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 設計ドキュメント
+- 画面設計
+<img width="1082" alt="スクリーンショット 2024-01-10 9 34 44" src="https://github.com/429uuuu/RestaurantSearcher/assets/142235241/6d46aed7-13dc-4e9e-b312-fa0bb5acce9d">
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 申し送り
+- 実装すべき機能
+  - 検索時のキーワード検索機能
+  - 直線距離ではなく、経路距離の表示 
+  - 一覧表示画面における検索条件の表示
+- データの取得に失敗した際のエラー処理が不十分
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+### アドバイスして欲しいポイント
+ユーザーに視点を置いた機能ではなく、「デザイン」という面でユーザーを意識するということがあまり経験がなく、反映できなかったため、例があれば教えていただきたいです。
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 自己評価
+上記でも挙げたように、UXを意識したデザインを反映させられなかった。
+デザイン面が特に不足しているため改善が必要である。
+また、Reactを用いたため、コンポーネントを更に活用していきたい。
