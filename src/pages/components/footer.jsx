@@ -1,6 +1,8 @@
-//pages/componemts/footer
+/* pages/components/footer
 
-/* フッター */
+  フッター
+
+*/
 
 const Footer = () => {
   return (

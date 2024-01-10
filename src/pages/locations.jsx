@@ -1,14 +1,17 @@
+/* /pages/location.jsx
+
+  :一覧表示画面
+
+*/
+
 import { useState, useEffect } from "react";
 import Image from "next/image"
 import Link from 'next/link'
 import ReactPaginate from 'react-paginate';
-import {Container, Row, Col } from 'react-bootstrap';
+import {Container, Row, Col, Alert } from 'react-bootstrap';
 
 
 const Locations = ({ results, latitude, longitude  }) => {
-
-  console.log(latitude);
-  // console.log(results.shop[1].id);
 
   /* ページング用 */
   const [itemStart, setItemStart] = useState(0);  //アイテムの表示開始位置
@@ -17,11 +20,8 @@ const Locations = ({ results, latitude, longitude  }) => {
     let pageNumber = data['selected']; 
     setItemStart(pageNumber * perPage)
   }
-
+  /* 距離算出用 */
   const R = Math.PI / 180;
-
- 
-  
 
 
   return(
@@ -39,15 +39,13 @@ const Locations = ({ results, latitude, longitude  }) => {
                     
                     <Link href={`./EachShop/${shop.id}`} className="link-dark link-underline link-underline-opacity-0">
                     <Row>
-                    {/* <Col md={3} className="position-relative"> */}
                     <Col md={3} className="display-block" style={{ display:"flex", alignItems: "center"}}>
                       <Image 
                         className="photo" 
                         src={shop.photo.pc.l} 
                         alt={"image"} 
                         layout={"responsive"}
-                        // objectFit={"cover"}
-                        // sizes="(max-width: 768px) 50vw"
+
                         width={100}
                         height={100}
 
@@ -55,10 +53,11 @@ const Locations = ({ results, latitude, longitude  }) => {
                       </Col>
                       <Col>
                         <h3 className="shop my-3">{shop.name}</h3>
-                        <p className="access">{shop.access}</p>  
-                        <p className="open">{shop.open}</p>
+                        <p className="card-subtitle mb-2 text-body-secondary">{shop.genre.name}　{shop.genre.catch} </p>
+                        <p className="access"><b>アクセス：</b>{shop.access}</p>  
+                        <p className="open"><b>営業時間：</b>{shop.open}</p>
                         {/* 直線距離 */}
-                        <p>直線距離：{Math.round(10 * (6371 * Math.acos(Math.cos(latitude*R) * Math.cos(shop.lat*R) * Math.cos(shop.lng*R - longitude*R) + Math.sin(latitude*R) * Math.sin(shop.lat*R))))/10}km</p>
+                        <p><b>直線距離：</b>{Math.round(10 * (6371 * Math.acos(Math.cos(latitude*R) * Math.cos(shop.lat*R) * Math.cos(shop.lng*R - longitude*R) + Math.sin(latitude*R) * Math.sin(shop.lat*R))))/10}km</p>
                       </Col>
                     </Row>
                     </Link>
@@ -112,13 +111,11 @@ export const getServerSideProps = async(context) =>{
   // 外部APIからデータをFetch
   try{
     const res = await fetch(
-      `${baseUrl}?key=${apiKey}&lat=${latitude}&lng=${longitude}&range=${range}&format=${format}` //緯度・軽度・範囲から検索
-      // `${baseUrl}?key=${apiKey}&lat=34.67&lng=135.52&range=5&order=4&format=${format}&count=${count}`
+      `${baseUrl}?key=${apiKey}&lat=${latitude}&lng=${longitude}&range=${range}&format=${format}&count=${count}` //緯度・軽度・範囲から検索
+ 
     );
     const json = await res.json();
     const { results } = json;
-
-    //直線距離の算出
 
     return { props: { 
       results,
@@ -126,5 +123,7 @@ export const getServerSideProps = async(context) =>{
       longitude } };
   }catch(e){
     console.error(e);
+    return context.status(400).json({message: "データの取得に失敗しました"})
+    
   }
 }

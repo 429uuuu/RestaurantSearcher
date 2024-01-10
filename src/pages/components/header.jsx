@@ -1,6 +1,9 @@
-//pages/components/header
+/* pages/components/header
 
-import Nav from 'react-bootstrap/Nav';
+  ヘッダー
+
+*/
+
 import Navbar from 'react-bootstrap/Navbar';
 
 /* ヘッダー */

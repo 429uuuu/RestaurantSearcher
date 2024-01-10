@@ -1,12 +1,18 @@
+/* pages/Eachshop/[ShopId].jsx
+
+個別詳細画面 
+
+*/
+
 import Image from "next/image"
 import { FaHome } from "react-icons/fa";
 import { ImEarth } from "react-icons/im";
 
 const shop = (shopDetails) => {
 
-  //shopリンク
+  /*shopリンク*/
   const shopLink = shopDetails.results.shop[0].urls.pc;
-  //map情報
+  /* map情報 */
   const latitude = shopDetails.results.shop[0].lat;
   const longitude = shopDetails.results.shop[0].lng;
   const googleMapLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
@@ -17,9 +23,11 @@ const shop = (shopDetails) => {
         <div className="card-body">
           <h2 className="card-title">{shopDetails.results.shop[0].name}</h2> 
           <h5 className="card-subtitle mb-2 text-body-secondary">{shopDetails.results.shop[0].name_kana}</h5>
+          <p >{shopDetails.results.shop[0].genre.name}　{shopDetails.results.shop[0].genre.catch} </p>
           <br />
-          <p>{shopDetails.results.shop[0].address}</p>
-          <p>{shopDetails.results.shop[0].open}</p> 
+          <p><b>住所：</b>{shopDetails.results.shop[0].address}</p>
+          <p><b>アクセス：</b>{shopDetails.results.shop[0].access}</p>  
+          <p><b>営業時間：</b>{shopDetails.results.shop[0].open}</p> 
           <a href={shopLink} target="_blank" rel="noopener noreferrer" className="btn btn-secondary me-3">
             <FaHome />店舗ページ
           </a>
